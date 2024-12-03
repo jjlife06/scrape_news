@@ -7,7 +7,12 @@
         <h1>Últimas noticias</h1>
         <ul>
             {% for noticia in noticias %}
-                <li><a href="{{ noticia.enlace }}"> {{ noticia.titular }} </a></li>
+                <li class="noticia">
+                    <img src="{{ noticia.imagen }}" alt="{{ noticia.titular }}">
+                    <div>
+                        <h2><a href="{{ noticia.enlace }}">{{ noticia.titular }}</a></h2>
+                    </div>
+                </li>
             {% endfor %}
         </ul>
     </body>

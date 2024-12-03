@@ -11,11 +11,23 @@ def index():
     soup = BeautifulSoup(response.content, "lxml")
 
     noticias = []
-    titulares = soup.find_all("h2", class_="c_t") # la clase depende del sitio web
+   # Refactorizamos para cargar artículo
+   #  titulares = soup.find_all("h2", class_="c_t") 
+    articulos = soup.find_all("article", class_="c c-d c--m") # la clase depende del sitio web
 
-    for titular in titulares:
-        enlace = titular.find("a")["href"]
-        noticias.append({"titular" : titular.text, "enlace" : enlace})
+    #for titular in titulares:
+    for articulo in articulos:
+        try:
+            titular = articulo.find("h2", class_="c_t")
+            enlace = titular.find("a")["href"]
+            imagen = articulo.find("img")
+            if imagen:
+                imagen = imagen["src"] # Extraemos url de la imagen
+            else:
+                imagen = None 
+            noticias.append({"titular" : titular.text, "enlace" : enlace, "imagen" : imagen})
+        except KeyError:
+            print("KeyError")
 
     return render_template("index.html", noticias = noticias)
 
