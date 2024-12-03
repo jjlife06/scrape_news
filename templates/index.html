@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Scrape de noticias</title>
+    </head>
+    <body>
+        <h1>Últimas noticias</h1>
+        <ul>
+            {% for noticia in noticias %}
+                <li><a href="{{ noticia.enlace }}"> {{ noticia.titular }} </a></li>
+            {% endfor %}
+        </ul>
+    </body>
+</html>
